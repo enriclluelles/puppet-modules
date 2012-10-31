@@ -1,0 +1,44 @@
+upstream <%= @domain_name.sub(".", "_") %> {
+  server unix:/tmp/<%= application %>.sock fail_timeout=0;
+}
+
+server {
+  listen <% if @port %><%= @port %><% else %>80<% end %>;
+  client_max_body_size 4G;
+  server_name <%= @domain_name %><%= ' ' + @server_names.join(' ') if @server_names %>;
+
+  keepalive_timeout 5;
+
+  root <%= deploy_to %>/current/public;
+  
+  if (-f $document_root/system/maintenance.html) {
+    return 503;
+  }
+  error_page 503 @maintenance;
+  location @maintenance {
+    rewrite  ^(.*)$  /system/maintenance.html last;
+    break;
+  }
+
+  location ~ ^/(assets)/  {
+    gzip_static on; # to serve pre-gzipped version
+    expires max;
+    add_header Cache-Control public;
+  }
+
+  location / {
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header Host $http_host;
+    proxy_redirect off;
+
+    if (!-f $request_filename) {
+      proxy_pass http://<%= domain_name.sub(".", "_") %>;
+      break;
+    }
+  }
+
+  error_page 500 502 503 504 /500.html;
+  location = /500.html {
+    root <%= deploy_to %>/current/public;
+  }
+}
