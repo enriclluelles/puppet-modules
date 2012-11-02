@@ -1,0 +1,25 @@
+{
+  "author": "brightbox",
+  "dependencies": [
+
+  ],
+  "summary": "Ubuntu apt package management configuration",
+  "source": "",
+  "version": "1.1.1",
+  "description": "Ubuntu apt package management configuration. Most likely much like the other apt modules available, but battle-tested by Brightbox (and has a couple of neat features).",
+  "types": [
+
+  ],
+  "project_page": "https://github.com/brightbox/puppet",
+  "license": "GPL3",
+  "name": "brightbox-apt",
+  "checksums": {
+    "Modulefile": "6cbcb4185b61b75bbd3773b5fca2a959",
+    "spec/classes/apt_spec.rb": "e84cf4478715041533949ef7a501611c",
+    "templates/preferences.erb": "e2677dcf80de02ec699795e976a20daf",
+    "spec/defines/apt_spec.rb": "e35de8c653de5bf47220268976e6fcfa",
+    "manifests/init.pp": "eeee16c7c10bfde4b96f9703c02ec546",
+    "lib/puppet/parser/functions/ppa_filename.rb": "88d8c3f18a2f01c8d85df869e4c5b265",
+    "spec/spec_helper.rb": "67329d39c5c3635f0b8f79dab5811ea3"
+  }
+}
