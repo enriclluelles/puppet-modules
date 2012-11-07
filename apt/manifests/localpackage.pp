@@ -13,7 +13,7 @@ define apt::localpackage(
     cwd => $repodir,
     creates => "${repodir}/${pkg_filename}",
     notify => Exec['apt-update-local-repo'],
-    require => File["${repodir}"],
+    require => [File["${repodir}"], Package['curl']],
   }
 
 }

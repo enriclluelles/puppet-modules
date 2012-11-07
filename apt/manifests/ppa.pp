@@ -3,6 +3,8 @@
 # with slashes in them)
 define apt::ppa() {
 
+  require apt
+
   case $::operatingsystemrelease {
     '12.04': { $cmd = '/usr/bin/add-apt-repository --yes' }
     default: { $cmd = '/usr/bin/add-apt-repository' }
@@ -11,7 +13,7 @@ define apt::ppa() {
   exec { "apt-add-repository-${name}":
     command => "${cmd} ppa:${name}",
     creates => ppa_filename($name),
-    notify => Exec["apt-update"],
+    notify => Exec['apt-update'],
   }
 
 }
