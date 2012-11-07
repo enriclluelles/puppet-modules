@@ -4,12 +4,7 @@ class { 'base': stage => 'pre-flight' }
 class base {
 
   include base::time
-
-  $packagelist = ['git-core', 'vim', 'screen', 'htop', 'tcpdump']
-
-  package { $packagelist:
-    ensure => installed,
-  }
+  include base::packages
 
   host { "${hostname}.lan" :
     ensure => present,
