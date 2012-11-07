@@ -1,5 +1,7 @@
 class stow {
-  package{ "stow":
+
+  package{ 'stow':
     ensure => installed,
-  }  
+  }
+
 }
