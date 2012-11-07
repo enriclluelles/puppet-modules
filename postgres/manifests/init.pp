@@ -1,9 +1,9 @@
 # Copyright (c) 2008, Luke Kanies, luke@madstop.com
-# 
+#
 # Permission to use, copy, modify, and/or distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above
 # copyright notice and this permission notice appear in all copies.
-# 
+#
 # THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
 # WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
 # MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
@@ -16,7 +16,7 @@ class postgres {
   include "postgres::$operatingsystem"
   $require = File['/etc/apt/sources.list.d/postgres.list']
 
-	package { [postgresql]: 
+	package { [postgresql]:
     ensure => installed,
     name => 'postgresql-9.2'
   }
@@ -32,8 +32,8 @@ class postgres {
 
     class ubuntu {
   		exec {"get-postgres-apt-key":
-        command => "apt-key adv --keyserver keyserver.ubuntu.com --recv 8683D8A2",
-        unless => "apt-key list | grep 8683D8A2",
+        command => "/usr/bin/apt-key adv --keyserver keyserver.ubuntu.com --recv 8683D8A2",
+        unless => "/usr/bin/apt-key list | /bin/grep 8683D8A2",
       }
 
   		file {"/etc/apt/sources.list.d/postgres.list":
