@@ -9,26 +9,26 @@ class redis(
   $port = 6379,
 ) {
 
-    apt::ppa { 'ppa:rwky/redis': }
+  apt::ppa { 'ppa:rwky/redis': }
 
-    package { 'redis-server':
-        ensure  => latest,
-        require => Apt::Ppa['ppa:rwky/redis'],
-    }
+  package { 'redis-server':
+    ensure => latest,
+    require => Apt::Ppa['ppa:rwky/redis'],
+  }
 
-    service { 'redis-server':
-        ensure  => running,
-        enable  => true,
-        require => Package['redis-server'],
-    }
+  service { 'redis-server':
+    ensure => running,
+    enable => true,
+    require => Package['redis-server'],
+  }
 
-    file { "/etc/redis/redis.conf":
-        content => template('redis/redis.conf.erb'),
-        mode    => '0644',
-        owner   => root,
-        group   => root,
-        require => Package[redis-server],
-        notify  => Service[redis-server],
-    }
+  file { "/etc/redis/redis.conf":
+    content => template('redis/redis.conf.erb'),
+    mode => '0644',
+    owner => root,
+    group => root,
+    require => Package[redis-server],
+    notify => Service[redis-server],
+  }
 
 }
