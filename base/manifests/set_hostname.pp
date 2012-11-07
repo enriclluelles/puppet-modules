@@ -1,8 +1,10 @@
-define base::set_hostname($hostname) {
+define base::set_hostname(
+  $hostname,
+) {
 
   exec { 'hostname':
-    command => "hostname ${hostname}",
-    unless => "test `hostname` = '${hostname}'"
+    command => "/bin/hostname ${hostname}",
+    unless => "/usr/bin/test `hostname` = '${hostname}'"
   }
 
   file { '/etc/hostname':
