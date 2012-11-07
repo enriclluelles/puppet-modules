@@ -18,11 +18,11 @@ daemonize yes
 
 # When running daemonized, Redis writes a pid file in /var/run/redis.pid by
 # default. You can specify a custom pid file location here.
-pidfile /var/run/redis/<%= name %>.pid
+pidfile /var/run/redis/redis.pid
 
 # Accept connections on the specified port, default is 6379.
 # If port 0 is specified Redis will not listen on a TCP socket.
-port <%= port %>
+port 6379
 
 # If you want you can bind a single interface, if the bind option is not
 # specified all the interfaces will listen for incoming connections.
@@ -45,12 +45,12 @@ timeout 0
 # verbose (many rarely useful info, but not a mess like the debug level)
 # notice (moderately verbose, what you want in production probably)
 # warning (only very important / critical messages are logged)
-loglevel <%= log_level %>
+loglevel verbose
 
 # Specify the log file name. Also 'stdout' can be used to force
 # Redis to log on the standard output. Note that if you use standard
 # output for logging but daemonize, logs will be sent to /dev/null
-logfile /var/log/redis/<%= name %>.log
+logfile /var/log/redis/redis.log
 
 # To enable logging to the system logger, just set 'syslog-enabled' to yes,
 # and optionally update the other syslog parameters to suit your needs.
@@ -65,7 +65,7 @@ logfile /var/log/redis/<%= name %>.log
 # Set the number of databases. The default database is DB 0, you can select
 # a different one on a per-connection basis using SELECT <dbid> where
 # dbid is a number between 0 and 'databases'-1
-databases <%= databases %>
+databases 16
 
 ################################ SNAPSHOTTING  #################################
 #
@@ -83,15 +83,9 @@ databases <%= databases %>
 #
 #   Note: you can disable saving at all commenting all the "save" lines.
 
-<%- if snapshotting -%>
 save 900 1
 save 300 10
 save 60 10000
-<%- else -%>
-# save 900 1
-# save 300 10
-# save 60 10000
-<%- end -%>
 
 # Compress string objects using LZF when dump .rdb databases?
 # For default that's set to 'yes' as it's almost always a win.
@@ -100,7 +94,7 @@ save 60 10000
 rdbcompression yes
 
 # The filename where to dump the DB
-dbfilename <%= dbfilename %>
+dbfilename dump.rdb
 
 # The working directory.
 #
@@ -216,10 +210,6 @@ slave-serve-stale-data yes
 #
 # maxmemory <bytes>
 
-<%- unless maxmemory == 0 -%>
-maxmemory <%= maxmemory %>
-<%- end %>
-
 # MAXMEMORY POLICY: how Redis will select what to remove when maxmemory
 # is reached? You can select among five behavior:
 # 
@@ -242,7 +232,6 @@ maxmemory <%= maxmemory %>
 # The default is:
 #
 # maxmemory-policy volatile-lru
-maxmemory-policy <%= maxmemory_policy %>
 
 # LRU and minimal TTL algorithms are not precise algorithms but approximated
 # algorithms (in order to save memory), so you can select as well the sample
@@ -270,7 +259,7 @@ maxmemory-policy <%= maxmemory_policy %>
 # IMPORTANT: Check the BGREWRITEAOF to check how to rewrite the append
 # log file in background when it gets too big.
 
-appendonly <%= appendonly %>
+appendonly no
 
 # The name of the append only file (default: "appendonly.aof")
 # appendfilename appendonly.aof

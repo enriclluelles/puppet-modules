@@ -1,3 +1,12 @@
-# puppet-redis
+# Puppet Redis
 
-> A puppet manifest for installed redis from source.
+## Usage
+
+    include redis
+
+    redis::config { 'redis':
+        log_level => 'warning',
+        port => 6379,
+        maxmemory => '2gb',
+        snapshotting => false,
+    }
