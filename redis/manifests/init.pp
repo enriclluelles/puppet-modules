@@ -22,7 +22,7 @@ class redis(
     require => Package['redis-server'],
   }
 
-  file { "/etc/redis/redis.conf":
+  file { '/etc/redis/redis.conf':
     content => template('redis/redis.conf.erb'),
     mode => '0644',
     owner => root,
