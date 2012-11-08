@@ -16,6 +16,7 @@ define postgres::database(
   $ensure,
   $owner = false,
   $encoding = 'UTF8',
+  $template = 'template0'
 ) {
     $ownerstring = $owner ? {
         false => "",
@@ -29,7 +30,7 @@ define postgres::database(
     case $ensure {
         present: {
             exec { "Create $name postgres db":
-                command => "/usr/bin/createdb $ownerstring $name --encoding=$encoding",
+                command => "/usr/bin/createdb $ownerstring $name --encoding=$encoding --template=$template",
                 user => postgres,
                 unless => "/usr/bin/psql -l | grep '$name  *|'",
                 require => Class['postgres'],
