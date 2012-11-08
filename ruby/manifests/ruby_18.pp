@@ -1,4 +1,4 @@
-class ruby::ruby18 {
+class ruby::ruby_18 {
 
   include ruby::extras
 
