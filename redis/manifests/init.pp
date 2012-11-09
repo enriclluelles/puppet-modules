@@ -7,13 +7,15 @@ class redis(
   $maxmemory = 0,
   $maxmemory_policy = 'volatile-lru',
   $port = 6379,
+  $redis_ppa = 'rwky/redis',
 ) {
 
-  apt::ppa { 'rwky/redis': }
+
+  apt::ppa { $redis_ppa: }
 
   package { 'redis-server':
     ensure => latest,
-    require => Apt::Ppa['rwky/redis'],
+    require => Apt::Ppa[$redis_ppa],
   }
 
   service { 'redis-server':
