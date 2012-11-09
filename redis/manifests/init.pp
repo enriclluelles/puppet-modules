@@ -11,7 +11,9 @@ class redis(
 ) {
 
 
-  apt::ppa { $redis_ppa: }
+  apt::ppa { $redis_ppa:
+    ppa => $redis_ppa,
+  }
 
   package { 'redis-server':
     ensure => latest,
