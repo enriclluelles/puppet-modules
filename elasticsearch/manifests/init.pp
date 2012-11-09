@@ -11,7 +11,7 @@
 # as Lucid apt-get doesn't support trusted=yes parameter
 #
 class elasticsearch(
-  $version = '0.19.3',
+  $version = '0.19.11',
   $heap_size = '1024m',
   $cluster_name = 'elasticsearch',
   $discovery_hosts = [],
@@ -21,22 +21,35 @@ class elasticsearch(
   $data = true,
 ) {
 
-  package { "default-jre-headless":
-    ensure => installed
+  package { 'default-jre-headless':
+    ensure => installed,
   }
 
-  apt::localpackage { "elasticsearch":
-    url => $deburl ? {
-      false => "http://cloud.github.com/downloads/elasticsearch/elasticsearch/elasticsearch-${version}.deb",
-      default => $deburl
-    }
+  file { 'elasticsearch-local-repo':
+    ensure => directory,
+    mode => '0755',
+    path => '/var/cache/local-repo',
   }
 
-  package { "elasticsearch":
-    ensure => $version
+  exec { "download-elastic-search":
+    command => "/usr/bin/curl -L -s -C - -O http://cloud.github.com/downloads/elasticsearch/elasticsearch/elasticsearch-${version}.deb",
+    cwd => '/var/cache/local-repo',
+    creates => "/var/cache/local-repo/elasticsearch-${version}.deb",
+    require => Package['curl'],
   }
 
-  service { "elasticsearch":
+  exec { 'install-elastic-search':
+    command => "/usr/bin/dpkg -i elasticsearch-${version}.deb",
+    cwd => '/var/cache/local-repo',
+    creates => '/usr/share/elasticsearch/bin/elasticsearch',
+    require => Exec['download-elastic-search'],
+  }
+
+  package { 'elasticsearch':
+    ensure => $version,
+  }
+
+  service { 'elasticsearch':
     ensure => true,
     enable => true,
     require => Package[elasticsearch],

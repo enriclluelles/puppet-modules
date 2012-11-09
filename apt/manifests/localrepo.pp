@@ -6,7 +6,7 @@ class apt::localrepo(
   file { "${repodir}":
     ensure => directory,
     mode => '0755',
-    notify => Exec['apt-update-local-repo'],
+    # notify => Exec['apt-update-local-repo'],
   }
 
   exec { 'apt-update-local-repo':

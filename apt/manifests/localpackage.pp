@@ -5,6 +5,8 @@ define apt::localpackage(
   $repodir = '/var/cache/local-repo',
 ) {
 
+  include apt::localrepo
+
   $url_tokens = split($url, '/')
   $pkg_filename = $url_tokens[-1]
 

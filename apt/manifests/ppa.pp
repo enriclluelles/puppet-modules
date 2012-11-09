@@ -12,8 +12,12 @@ define apt::ppa() {
 
   exec { "apt-add-repository-${name}":
     command => "${cmd} ppa:${name}",
-    creates => ppa_filename($name),
-    notify => Exec['apt-update'],
+    # notify => Exec["apt-update-${name}"],
   }
+
+  # exec { "apt-update-${name}":
+    # command => '/usr/bin/apt-get update',
+    # refreshonly => true,
+  # }
 
 }
