@@ -4,7 +4,7 @@ define apache::ports(
 ) {
 
   file { '/etc/apache2/ports.conf':
-    content => template('apache/etc/apache2/ports.conf'),
+    content => template('apache/etc/apache2/ports.conf.erb'),
     mode    => '0644',
     owner   => root,
     group   => root,
