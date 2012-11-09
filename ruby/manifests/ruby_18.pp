@@ -1,4 +1,6 @@
-class ruby::ruby_18 {
+class ruby::ruby_18(
+  $ensure = 'installed',
+) {
 
   include ruby::extras
 
@@ -13,7 +15,7 @@ class ruby::ruby_18 {
   ]
 
   package { $packagelist:
-    ensure => latest,
+    ensure => $ensure,
   }
 
   package { 'bundler':
