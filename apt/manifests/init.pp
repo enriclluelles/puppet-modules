@@ -6,7 +6,7 @@ class apt {
   }
 
   # Ensure apt is setup before running apt-get update
-  Apt::Ppa <| |> -> Exec["apt-update"]
+  # Apt::Ppa <| |> -> Exec["apt-update"]
   Apt::Key <| |> -> Exec["apt-update"]
 
   # Ensure apt-get update has been run before installing any packages
@@ -54,7 +54,18 @@ define apt::ppa($ppa = "") {
   exec { "apt-add-repository-$ppa":
     command => "/usr/bin/apt-add-repository ppa:$ppa",
     creates => ppa_filename($ppa),
-    notify => Exec["apt-update"],
+    notify  => Exec["apt-update-${name}"],
+    require => Package['python-software-properties'],
+  }
+
+  # Hack to avoid "dependency cicly".
+  exec { "apt-update-${name}":
+    command => '/usr/bin/apt-get update',
+    refreshonly => true,
+  }
+
+  if ! defined(Package['python-software-properties']) {
+    package { 'python-software-properties': }
   }
 }
 
