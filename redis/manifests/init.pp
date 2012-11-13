@@ -1,10 +1,6 @@
 class redis(
-  $log_level = 'warning',
+  $log_level = 'notice',
   $databases = 16,
-  $appendonly = 'no',
-  $dbfilename = 'dump.rdb',
-  $snapshotting = true,
-  $maxmemory = 0,
   $maxmemory_policy = 'volatile-lru',
   $port = 6379,
   $redis_ppa = 'rwky/redis',
