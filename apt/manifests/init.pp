@@ -10,5 +10,5 @@ class apt {
   Apt::Key <| |> -> Exec["apt-update"]
 
   # Ensure apt-get update has been run before installing any packages
-  Exec["apt-update"] -> Package <| |>
+  # Exec["apt-update"] -> Package <| |>
 }
