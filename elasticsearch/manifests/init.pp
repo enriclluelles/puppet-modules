@@ -21,7 +21,7 @@ class elasticsearch(
   $data = true,
 ) {
 
-  package { 'default-jre-headless':
+  package { 'openjdk-6-jre-headless':
     ensure => installed,
   }
 
