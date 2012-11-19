@@ -19,7 +19,7 @@ class ruby::ruby_18(
   }
 
   package { 'bundler':
-    ensure   => latest,
+    ensure   => '1.2.1',
     provider => gem,
     require  => Exec['gem18-default'],
   }
