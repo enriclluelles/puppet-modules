@@ -17,7 +17,7 @@ class ruby::ruby_19(
   }
 
   package { 'bundler':
-    ensure   => latest,
+    ensure   => '1.2.1',
     provider => gem,
     require  => Exec['gem19-default'],
   }
