@@ -2,12 +2,8 @@ class ruby::extras(
   $ensure = 'present',
 ) {
 
-  if ! defined(Package['libxslt-dev']) {
-    package { 'libxslt-dev': ensure => $ensure; }
-  }
-
-  if ! defined(Package['libxml2-dev']) {
-    package { 'libxml2-dev': ensure => $ensure; }
+  if ! defined(Package['libxslt1-dev']) {
+    package { 'libxslt1-dev': ensure => $ensure; }
   }
 
 }
