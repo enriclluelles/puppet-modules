@@ -1,11 +1,13 @@
-class imagemagick {
+class imagemagick (
+  $ensure = 'latest',
+) {
 
   package { 'imagemagick':
-    ensure => installed,
+    ensure => $ensure,
   }
 
   package { 'libmagickwand-dev':
-    ensure => installed,
+    ensure => $ensure,
   }
 
 }
