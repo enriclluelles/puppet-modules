@@ -1,5 +1,5 @@
 class ruby::ruby_18(
-  $ensure = 'installed',
+  $ensure = 'latest',
 ) {
 
   include ruby::extras

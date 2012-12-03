@@ -1,5 +1,5 @@
 class ruby::extras(
-  $ensure = 'present',
+  $ensure = 'latest',
 ) {
 
   if ! defined(Package['libxslt1-dev']) {

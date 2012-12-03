@@ -1,5 +1,6 @@
 class ruby::stow(
   $version = '1.9.3-p125',
+  $ensure = 'latest',
 ) {
 
   include stow
@@ -7,7 +8,7 @@ class ruby::stow(
   $packagelist = ['libreadline-dev', 'libxslt1-dev', 'libcurl4-openssl-dev']
 
   package { $packagelist:
-    ensure => installed,
+    ensure => $ensure,
   }
 
   file { "/usr/local/bin/stow-ruby-${version}":
