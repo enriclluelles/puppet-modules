@@ -9,6 +9,7 @@ class base::packages {
     'tcpdump',
     'lsb-release',
     'curl',
+    'ack-grep',
   ]
 
   package { $packagelist: }
