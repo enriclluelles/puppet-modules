@@ -2,7 +2,6 @@ class base::packages {
 
   $packagelist = [
     'build-essential',
-    'git-core',
     'vim',
     'screen',
     'htop',
@@ -13,5 +12,9 @@ class base::packages {
   ]
 
   package { $packagelist: }
+
+  if ! defined(Package['git-core']) {
+    package { 'git-core': }
+  }
 
 }
