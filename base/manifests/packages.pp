@@ -5,6 +5,7 @@ class base::packages {
     'vim',
     'screen',
     'htop',
+    'iotop',
     'tcpdump',
     'lsb-release',
     'curl',
