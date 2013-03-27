@@ -1,5 +1,5 @@
 class imagemagick (
-  $ensure = 'latest',
+  $ensure = 'present',
 ) {
 
   package { 'imagemagick':
