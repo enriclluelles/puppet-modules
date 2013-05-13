@@ -4,6 +4,7 @@ class redis(
   $maxmemory_policy = 'volatile-lru',
   $port = 6379,
   $redis_ppa = 'rwky/redis',
+  $maxmemory = undef,
 ) {
 
 

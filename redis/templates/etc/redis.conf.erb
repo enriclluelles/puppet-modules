@@ -263,7 +263,11 @@ slave-read-only yes
 # limit for maxmemory so that there is some free RAM on the system for slave
 # output buffers (but this is not needed if the policy is 'noeviction').
 #
+<%- if maxmemory -%>
+maxmemory <%= maxmemory %>
+<%- else -%>
 # maxmemory <bytes>
+<%- end -%>
 
 # MAXMEMORY POLICY: how Redis will select what to remove when maxmemory
 # is reached? You can select among five behavior:
